@@ -1,2 +1,2 @@
-# cs3300
+# CS-3300
 Repo for CS-3300 Software Engineering
