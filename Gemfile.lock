@@ -103,6 +103,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
+    pg (0.21.0)
     public_suffix (4.0.6)
     puma (3.12.6)
     racc (1.6.0)
@@ -127,6 +128,11 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (5.2.7)
       actionpack (= 5.2.7)
       activesupport (= 5.2.7)
@@ -190,6 +196,7 @@ GEM
       nokogiri (~> 1.8)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -200,8 +207,10 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  pg (~> 0.21)
   puma (~> 3.11)
   rails (~> 5.2.4)
+  rails_12factor
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
