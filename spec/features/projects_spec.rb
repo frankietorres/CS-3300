@@ -1,7 +1,33 @@
 require 'rails_helper'
 
 RSpec.feature "Projects", type: :feature do
-  context "Create new project" do
+  context "Create new project while signed in" do
+    before(:each) do
+      visit new_user_session_path
+      fill_in "Email", with: "test@email.com"
+      fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
+      click_button "Sign up"
+
+      visit new_project_path
+      within("form") do
+        fill_in "Title", with: "Test title"
+      end
+    end
+
+    scenario "should be successful" do
+      fill_in "Description", with: "Test description"
+      click_button "Create Project"
+      expect(page).to have_content("Project was successfully created")
+    end
+
+    scenario "should fail" do
+      click_button "Create Project"
+      expect(page).to have_content("Description can't be blank")
+    end
+  end
+
+  context "Create new project while logged out" do
     before(:each) do
       visit new_project_path
       within("form") do
