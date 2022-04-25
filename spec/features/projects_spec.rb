@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# Projects spec
 RSpec.feature "Projects", type: :feature do
   context "Create new project while signed in" do
 
