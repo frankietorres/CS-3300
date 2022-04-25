@@ -24,8 +24,8 @@ RSpec.feature "Projects", type: :feature do
     # Description is not filled in so therefore the project creation should be unsuccessful
     scenario "should fail" do
       visit new_project_path
-      fill_in "project_title", with: "Test title"
-      fill_in "project_description", with: ""
+      fill_in "Title", with: "Test title"
+      fill_in "Description", with: ""
       click_button "Create Project"
       expect(page).to have_content("Description can't be blank")
     end
@@ -87,12 +87,6 @@ RSpec.feature "Projects", type: :feature do
       fill_in "user_password", with: "password"
       fill_in "user_password_confirmation", with: "password"
       click_button "Sign up"
-    end
-
-    # Delete the test account after all tests are run
-    after(:all) do 
-      visit edit_user_registration_path
-      click_button "Cancel my acccount"
     end
 
     scenario "should be successful" do
