@@ -4,7 +4,7 @@ RSpec.feature "Projects", type: :feature do
   context "Create new project while signed in" do
 
     # Create a test account beforehand
-    before(:all) do
+    before(:each) do
       visit new_user_registration_path
       fill_in "user_email", with: "test@email.com"
       fill_in "user_password", with: "password"
@@ -13,7 +13,7 @@ RSpec.feature "Projects", type: :feature do
     end
 
     # Delete test account afterward
-    after(:all) do
+    after(:each) do
       visit cancel_user_registration_path
     end
 
@@ -29,8 +29,7 @@ RSpec.feature "Projects", type: :feature do
     # Description is not filled in so therefore the project creation should be unsuccessful
     scenario "should fail" do
       visit new_project_path
-      fill_in "Title", with: "Test title"
-      fill_in "Description", with: ""
+      fill_in "project_title", with: "Test title"
       click_button "Create Project"
       expect(page).to have_content("Description can't be blank")
     end
@@ -48,7 +47,7 @@ RSpec.feature "Projects", type: :feature do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
 
     # Create a test account beforehand
-    before(:all) do
+    before(:each) do
       visit new_user_registration_path
       fill_in "user_email", with: "test@email.com"
       fill_in "user_password", with: "password"
@@ -57,21 +56,19 @@ RSpec.feature "Projects", type: :feature do
     end
 
     # Delete test account afterward
-    after(:all) do
+    after(:each) do
       visit cancel_user_registration_path
     end
 
-    before(:each) do
-      visit edit_project_path(project)
-    end
-
     scenario "should be successful" do
+      visit edit_project_path(project)
       fill_in "project_description", with: "New description content"
       click_button "Update Project"
       expect(page).to have_content("Project was successfully updated")
     end
 
     scenario "should fail" do
+      visit edit_project_path(project)
       fill_in "project_description", with: ""
       click_button "Update Project"
       expect(page).to have_content("Description can't be blank")
@@ -93,12 +90,17 @@ RSpec.feature "Projects", type: :feature do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
 
     # Create a test account beforehand
-    before(:all) do
+    before(:each) do
       visit new_user_registration_path
       fill_in "user_email", with: "test@email.com"
       fill_in "user_password", with: "password"
       fill_in "user_password_confirmation", with: "password"
       click_button "Sign up"
+    end
+
+    # Delete test account afterward
+    after(:each) do
+      visit cancel_user_registration_path
     end
 
     scenario "should be successful" do
