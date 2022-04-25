@@ -12,6 +12,11 @@ RSpec.feature "Projects", type: :feature do
       click_button "Sign up"
     end
 
+    # Delete test account afterward
+    after(:all) do
+      visit cancel_user_registration_path
+    end
+
     # Title and Description are filled in so therefore the project should be created successfully
     scenario "should be successful" do
       visit new_project_path
@@ -51,6 +56,11 @@ RSpec.feature "Projects", type: :feature do
       click_button "Sign up"
     end
 
+    # Delete test account afterward
+    after(:all) do
+      visit cancel_user_registration_path
+    end
+
     before(:each) do
       visit edit_project_path(project)
     end
@@ -70,8 +80,10 @@ RSpec.feature "Projects", type: :feature do
 
   # Not signed in so the edit project path should redirect to a sign-in/sign-up page
   context "Update project while signed out" do
+    let(:project) { Project.create(title: "Test title", description: "Test content") }
+
     scenario "should fail" do
-      visit edit_project_path
+      visit edit_project_path(project)
       expect(page).to have_content("You must sign in to edit projects")
     end
   end
