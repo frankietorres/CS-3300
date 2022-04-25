@@ -21,7 +21,7 @@ RSpec.feature "Projects", type: :feature do
     # Title and Description are filled in so therefore the project should be created successfully
     scenario "should be successful" do
       visit new_project_path
-      fill_in "project_title", with: "Test title"
+      fill_in "Title", with: "Test title"
       fill_in "project_description", with: "Test description"
       click_button "Create Project"
       expect(page).to have_content("Project was successfully created")
@@ -106,7 +106,7 @@ RSpec.feature "Projects", type: :feature do
       click_button "Cancel my acccount"
     end
 
-    scenario "remove project" do
+    scenario "should be successful" do
       visit projects_path
       click_link "Destroy"
       expect(page).to have_content("Project was successfully destroyed")
@@ -117,7 +117,7 @@ RSpec.feature "Projects", type: :feature do
   # Deleting a project while signed out
   context "Remove existing project while signed out" do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
-    scenario "remove project" do
+    scenario "should fail" do
       visit projects_path
       click_link "Destroy"
       expect(page).to have_content("Unsuccessful. You must sign in to destroy projects")
