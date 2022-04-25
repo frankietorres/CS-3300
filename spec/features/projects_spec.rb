@@ -4,9 +4,9 @@ RSpec.feature "Projects", type: :feature do
   context "Create new project while signed in" do
     before(:each) do
       visit new_user_session_path
-      fill_in "Email", with: "test@email.com"
-      fill_in "Password", with: "password"
-      fill_in "Password confirmation", with: "password"
+      fill_in "user_email", with: "test@email.com"
+      fill_in "user_password", with: "password"
+      fill_in "user_password_confirmation", with: "password"
       click_button "Sign up"
 
       visit new_project_path
