@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "Projects", type: :feature do
   context "Create new project while signed in" do
     before(:each) do
-      visit new_user_session_path
+      visit new_user_registration_path
       fill_in "user_email", with: "test@email.com"
       fill_in "user_password", with: "password"
       fill_in "user_password_confirmation", with: "password"
