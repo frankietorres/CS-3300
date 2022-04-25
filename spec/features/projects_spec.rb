@@ -12,16 +12,10 @@ RSpec.feature "Projects", type: :feature do
       click_button "Sign up"
     end
 
-    # Delete the test account after all tests are run
-    after(:all) do 
-      visit edit_user_registration_path
-      click_button "Cancel my acccount"
-    end
-
     # Title and Description are filled in so therefore the project should be created successfully
     scenario "should be successful" do
       visit new_project_path
-      fill_in "Title", with: "Test title"
+      fill_in "project_title", with: "Test title"
       fill_in "project_description", with: "Test description"
       click_button "Create Project"
       expect(page).to have_content("Project was successfully created")
@@ -31,6 +25,7 @@ RSpec.feature "Projects", type: :feature do
     scenario "should fail" do
       visit new_project_path
       fill_in "project_title", with: "Test title"
+      fill_in "project_description", with: ""
       click_button "Create Project"
       expect(page).to have_content("Description can't be blank")
     end
@@ -58,12 +53,6 @@ RSpec.feature "Projects", type: :feature do
 
     before(:each) do
       visit edit_project_path(project)
-    end
-
-    # Delete the test account after all tests are run
-    after(:all) do 
-      visit edit_user_registration_path
-      click_button "Cancel my acccount"
     end
 
     scenario "should be successful" do
