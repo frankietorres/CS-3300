@@ -1,4 +1,16 @@
-# README
+# Ruby on Rails Portfolio Website
+
+* Ruby 2.7.0
+* Portfolio for my software projects
+
+
+
+
+
+
+
+
+
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
