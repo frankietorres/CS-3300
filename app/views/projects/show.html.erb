@@ -1,18 +1,20 @@
-<p id="notice"><%= notice %></p>
+<center>
 
-<p>
-  <strong>Title:</strong>
-  <%= @project.title %>
-</p>
+  <div class="card">
+    <div class="card-body">
+      <h3 class="card-title"><%= @project.title %></h3>
+      <p class="card-text"><%= @project.description %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
+  <br>
 
-<% if current_user %>
-  <%= link_to 'Edit', edit_project_path(@project) %> |
-  <%= link_to 'Back', projects_path %>
-<% else %>
-  <%= link_to 'Back', projects_path %>
-<% end %>
+  <% if current_user %>
+    <%= link_to 'Edit', edit_project_path(@project) %> |
+    <%= link_to 'Back', projects_path %>
+  <% else %>
+    <%= link_to 'Back', projects_path %>
+  <% end %>
+
+
+</center>

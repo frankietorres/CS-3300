@@ -1,49 +1,38 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome to my site!</h1>
+    <p class="lead">My name is Frankie Torres and this is my portfolio website. Browse through some of my projects that I am proud of!</p>
+  </div>
+</div>
 
-<h1>Projects</h1>
+<div class="card-group">
+  <% @projects.each do |project| %>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= project.title %></h5>
+        <p class="card-text"><%= project.description %></p>
+      </div>
+      <div class="card-footer">
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-outline-dark btn-sm"> <%= link_to 'Show', project %> </button>
+          </div>
+          <% if user_signed_in? %>
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+              <button type="button" class="btn btn-outline-dark btn-sm"> <%= link_to 'Edit', edit_project_path(project) %> </button>
+              <button type="button" class="btn btn-outline-dark btn-sm"> <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %> </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
+<hr>
 
-      <li class="nav-item">
-        <%= link_to "Sign Up", new_user_registration_path %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to "Sign In", new_user_session_path %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to "Edit Profile",
-        edit_user_registration_path %>
-      </li>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if current_user %>
-  <%= link_to 'New Project', new_project_path %>
-<% end %>
+<div class="text-center">
+  <% if user_signed_in? %>
+      <button type="button" class="btn btn-outline-dark btn-sm"> <%= link_to 'New Project', new_project_path %> </button>
+  <% end %>
+</div>
