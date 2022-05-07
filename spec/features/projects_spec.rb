@@ -106,21 +106,25 @@ RSpec.feature "Projects", type: :feature do
 
     scenario "should be successful" do
       visit projects_path
-      click_link "Destroy"
+      click_link "Delete"
       expect(page).to have_content("Project was successfully destroyed")
       expect(Project.count).to eq(0)
     end
   end
+
+=begin  DONT USE THIS TEST ANYMORE, DELETE BUTTON IS NOT AVAILABLE TO CLICK FOR UNAUTHORIZED USERS
 
   # Deleting a project while signed out
   context "Remove existing project while signed out" do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "should fail" do
       visit projects_path
-      click_link "Destroy"
+      click_link "Delete"
       expect(page).to have_content("Unsuccessful. You must sign in to destroy projects")
       expect(Project.count).to eq(1)
     end
   end
+  
+=end 
 
 end
